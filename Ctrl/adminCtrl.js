@@ -72,6 +72,7 @@ exports.getTypeInfo=function(req,res){
 }
 
 exports.addArticle=function(req,res){
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
         //const inputValue=fields.input;
@@ -84,7 +85,7 @@ exports.addArticle=function(req,res){
 
 
 exports.getArticleList=function(req,res){
-
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     let sql = 'SELECT article.id as id,'+
     'article.title as title,'+
     'article.introduce as introduce,'+
@@ -105,6 +106,8 @@ exports.getArticleList=function(req,res){
 }
 
 exports.getArticleById=function(req,res){
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+    
     let id=req.params.id;
     console.log("id---",id)
 
