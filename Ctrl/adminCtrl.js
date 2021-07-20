@@ -30,7 +30,7 @@ exports.checkLogin=function(req,res){
             let openId=new Date().getTime();
 
             if(err){
-               console.log("sever error ",err);
+               console.log("sever error---",err);
                return;
             }else if(data.length>0){
               res.json({
@@ -43,7 +43,7 @@ exports.checkLogin=function(req,res){
                 })
             }
 
-            console.log("session***************:"+openId)
+            console.log("session******openId*******:"+openId)
         }) 
     
     })
@@ -56,7 +56,7 @@ exports.index=function(req,res){
 
     db.query("SELECT * FROM type",function(err,data){
         if(err){
-          console.log("access type info wrong",err);
+          console.log("server error---",err);
         }else{
           //console.log(data);
           res.json({"data":data})
@@ -71,7 +71,7 @@ exports.getTypeInfo=function(req,res){
 
     db.query("SELECT * FROM type",function(err,data){
         if(err){
-          console.log("access type info wrong",err);
+          console.log("server error---",err);
         }else{
           //console.log(data);
           res.json({"data":data})
@@ -188,7 +188,7 @@ exports.getArticleList=function(req,res){
 
     db.query(sql,function(err,data){
         if(err){
-          console.log("access type info wrong",err);
+          console.log("server error---",err);
         }else{
           res.json({"data":data})
         }
