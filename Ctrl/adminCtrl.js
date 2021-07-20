@@ -3,7 +3,7 @@ const mysql = require('mysql');
 var formidable = require('formidable');
 
 const pdUrl="http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
-//const localUrl="http://localhost:3000";
+//const pdUrl="http://localhost:3000";
 
 var db = mysql.createConnection({
     host: 'blog-db.camhq7invtrq.us-east-2.rds.amazonaws.com',
@@ -14,9 +14,8 @@ var db = mysql.createConnection({
   });
 
 exports.checkLogin=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
-    //console.log(req)
+
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
         console.log(fields)
@@ -51,7 +50,6 @@ exports.checkLogin=function(req,res){
 
 
 exports.index=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
 
     db.query("SELECT * FROM type",function(err,data){
@@ -66,7 +64,6 @@ exports.index=function(req,res){
 
 
 exports.getTypeInfo=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
 
     db.query("SELECT * FROM type",function(err,data){
@@ -80,7 +77,6 @@ exports.getTypeInfo=function(req,res){
 }
 
 exports.addArticle=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
 
     let form = new formidable.IncomingForm()
@@ -128,7 +124,6 @@ exports.addArticle=function(req,res){
 
 
 exports.updateArticle=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
 
     let form = new formidable.IncomingForm()
@@ -174,7 +169,6 @@ exports.updateArticle=function(req,res){
 
 
 exports.getArticleList=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
 
     let sql = 'SELECT article.id as id,'+
@@ -196,7 +190,6 @@ exports.getArticleList=function(req,res){
 }
 
 exports.getArticleById=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
 
     let id=req.params.id;
@@ -225,7 +218,6 @@ exports.getArticleById=function(req,res){
 
 
 exports.delArticle=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
     
     let id=req.params.id;
