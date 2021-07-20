@@ -2,7 +2,8 @@
 const mysql = require('mysql');
 var formidable = require('formidable');
 
-const pdUrl="https://main.d32pjphjn4veuq.amplifyapp.com";
+//const pdUrl="https://main.d32pjphjn4veuq.amplifyapp.com";
+const pdUrl="https://ll-blog-client.vercel.app";
 
 var db = mysql.createConnection({
     host: 'blog-db.camhq7invtrq.us-east-2.rds.amazonaws.com',
