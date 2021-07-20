@@ -3,7 +3,7 @@ const mysql = require('mysql');
 var formidable = require('formidable');
 
 const pdUrl="http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
-const localUrl="http://localhost:3000";
+//const localUrl="http://localhost:3000";
 
 var db = mysql.createConnection({
     host: 'blog-db.camhq7invtrq.us-east-2.rds.amazonaws.com',

@@ -5,7 +5,7 @@ const port = process.env.port || 8081;
 var adminCtrl=require("./Ctrl/adminCtrl");
 var clientCtrl=require("./Ctrl/clientCtrl");
 
-const pdUrl="http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
+//const pdUrl="http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
 //const pdUrl_client="https://main.d32pjphjn4veuq.amplifyapp.com";
 
 app.options('*', (req, res) => {
