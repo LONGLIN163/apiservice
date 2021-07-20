@@ -52,7 +52,7 @@ exports.index=function(req,res){
         if(err){
           console.log("access type info wrong",err);
         }else{
-          console.log(data);
+          //console.log(data);
           res.json({"data":data})
         }
     })
@@ -65,7 +65,7 @@ exports.getTypeInfo=function(req,res){
         if(err){
           console.log("access type info wrong",err);
         }else{
-          console.log(data);
+          //console.log(data);
           res.json({"data":data})
         }
     })
@@ -75,13 +75,91 @@ exports.addArticle=function(req,res){
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
-        //const inputValue=fields.input;
-        console.log(fields)
-        const result = mergeLetters(inputValue)
-        //console.log(result)
-        res.json({"result":result})
+        let temArticle=fields;
+        //console.log("addArticle------>",temArticle)
+
+        function toLiteral(str) {
+          var dict = { '\b': 'b', '\t': 't', '\n': 'n', '\v': 'v', '\f': 'f', '\r': 'r' };
+          return str.replace(/([\\'"\b\t\n\v\f\r])/g, function($0, $1) {
+              return '\\' + (dict[$1] || $1);
+          });
+        }
+
+        const sql = 'INSERT INTO '+
+            'article VALUES('+0+','
+            +temArticle.type_id+
+            ',"'+temArticle.title+'","'
+            +`${toLiteral(temArticle.article_content)}`+'","'
+            +temArticle.introduce+'","'
+            +temArticle.addTime+'",'
+            +temArticle.view_count+')';
+            
+            //'article_content="'+`${ toLiteral(temArticle.article_content)}`+'",'+
+            //+temArticle.article_content+'","'
+        console.log("sql:",sql)
+
+        db.query(sql,(error, results, fields) => {
+          if (error) {
+            throw error;
+          }
+
+          console.log("results----------",results);
+          const insertSuccess = results.affectedRows === 1; // if there is one row changed, it will be true
+          const insertId = results.insertId
+        
+          res.json({
+              isScuccess:insertSuccess,
+              insertId
+            })
+
+        });
     })
 }
+
+
+exports.updateArticle=function(req,res){
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+
+    let form = new formidable.IncomingForm()
+    form.parse(req, (err, fields, file) => {
+        let temArticle=fields;
+        //console.log("updateArticle------>",temArticle)
+
+        function toLiteral(str) {
+          var dict = { '\b': 'b', '\t': 't', '\n': 'n', '\v': 'v', '\f': 'f', '\r': 'r' };
+          return str.replace(/([\\'"\b\t\n\v\f\r])/g, function($0, $1) {
+              return '\\' + (dict[$1] || $1);
+          });
+        }
+
+        const sql = 'UPDATE article '+ 
+        'SET type_id='+temArticle.type_id+
+        ',title="'+ temArticle.title+'",'+
+        'article_content="'+`${ toLiteral(temArticle.article_content)}`+'",'+
+        'introduce="'+temArticle.introduce+'",'+
+        'addTime="'+temArticle.addTime+'" '+
+        'WHERE article.id='+temArticle.id;
+        
+        //'article_content="'+temArticle.article_content.replace("'","''");+'",'+
+
+        console.log("sql-----:",sql)
+
+        db.query(sql,(error, results, fields) => {
+          if (error) {
+            throw error;
+          }
+
+          console.log("updateresults----------",results);
+          const updateSuccess = results.affectedRows === 1; // if there is one row changed, it will be true
+        
+          res.json({
+              isSuccess:updateSuccess
+          })
+
+        });
+    })
+}
+
 
 
 exports.getArticleList=function(req,res){
@@ -99,7 +177,6 @@ exports.getArticleList=function(req,res){
         if(err){
           console.log("access type info wrong",err);
         }else{
-          console.log(data);
           res.json({"data":data})
         }
     })  
@@ -107,7 +184,7 @@ exports.getArticleList=function(req,res){
 
 exports.getArticleById=function(req,res){
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-    
+
     let id=req.params.id;
     console.log("id---",id)
 
@@ -126,8 +203,23 @@ exports.getArticleById=function(req,res){
         if(err){
           console.log("access type info wrong",err);
         }else{
-          console.log(data);
+          //console.log(data);
           res.json({"data":data})
         }
     })  
+}
+
+
+exports.delArticle=function(req,res){
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+    let id=req.params.id;
+    console.log("id---",id)
+    let sql = `DELETE FROM article WHERE id = ${id}`
+    console.log("sql---",sql)
+    db.query(sql,function(err,data){
+        if(err){
+          console.log("access type info wrong",err);
+        }
+        res.json({"data":data})
+    })
 }

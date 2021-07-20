@@ -15,10 +15,10 @@ app.options('*', (req, res) => {
 app.get('/',                         adminCtrl.index);
 app.post('/admin/checkLogin',        adminCtrl.checkLogin);
 app.get('/admin/getTypeInfo',        adminCtrl.getTypeInfo);
-//app.post('/admin/addArticle',        adminCtrl.addArticle);
-//app.post('/admin/updateArticle',     adminCtrl.updateArticle);
+app.post('/admin/addArticle',        adminCtrl.addArticle);
+app.post('/admin/updateArticle',     adminCtrl.updateArticle);
 app.get('/admin/getArticleList',     adminCtrl.getArticleList);
-//app.get('/admin/delArticle/:id',     adminCtrl.delArticle);
+app.get('/admin/delArticle/:id',     adminCtrl.delArticle);
 app.get('/admin/getArticleById/:id', adminCtrl.getArticleById); 
 
 app.listen(port, () => {
