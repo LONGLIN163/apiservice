@@ -103,7 +103,7 @@ exports.addArticle=function(req,res){
             throw error;
           }
 
-          console.log("results----------",results);
+          console.log("addArticle---results----------",results);
           const insertSuccess = results.affectedRows === 1; // if there is one row changed, it will be true
           const insertId = results.insertId
         
