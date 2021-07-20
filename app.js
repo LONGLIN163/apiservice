@@ -6,10 +6,12 @@ var adminCtrl=require("./Ctrl/adminCtrl");
 var clientCtrl=require("./Ctrl/clientCtrl");
 
 const pdUrl="http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
+const pdUrl_client="https://main.d32pjphjn4veuq.amplifyapp.com";
 
 app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-  //res.header('Access-Control-Allow-Origin', pdUrl)
+  //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  //res.header('Access-Control-Allow-Origin', [pdUrl,pdUrl_client])
+  res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Method', 'post')
   res.header('Access-Control-Allow-Headers', '*')
   res.send()

@@ -2,8 +2,8 @@
 const mysql = require('mysql');
 var formidable = require('formidable');
 
-//const pdUrl="http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
-const localUrl="http://localhost:3000";
+const pdUrl="https://main.d32pjphjn4veuq.amplifyapp.com";
+//const localUrl="http://localhost:3000";
 
 var db = mysql.createConnection({
     host: 'blog-db.camhq7invtrq.us-east-2.rds.amazonaws.com',
@@ -15,8 +15,8 @@ var db = mysql.createConnection({
 
 
 exports.index=function(req,res){
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-    //res.header('Access-Control-Allow-Origin', pdUrl)
+    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+    res.header('Access-Control-Allow-Origin', pdUrl)
 
     db.query("SELECT * FROM type",function(err,data){
         if(err){
@@ -30,8 +30,8 @@ exports.index=function(req,res){
 
 
 exports.getTypeInfo=function(req,res){
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-    //res.header('Access-Control-Allow-Origin', pdUrl)
+    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+    res.header('Access-Control-Allow-Origin', pdUrl)
 
     db.query("SELECT * FROM type",function(err,data){
         if(err){
@@ -45,8 +45,8 @@ exports.getTypeInfo=function(req,res){
 
 
 exports.getArticleList=function(req,res){
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-    //res.header('Access-Control-Allow-Origin', pdUrl)
+    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+    res.header('Access-Control-Allow-Origin', pdUrl)
 
     let sql = 'SELECT article.id as id,'+
     'article.title as title,'+
@@ -66,8 +66,8 @@ exports.getArticleList=function(req,res){
 }
 
 exports.getArticleById=function(req,res){
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-    //res.header('Access-Control-Allow-Origin', pdUrl)
+    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+    res.header('Access-Control-Allow-Origin', pdUrl)
 
     let id=req.params.id;
     console.log("client-getArticleById---",id)
@@ -95,8 +95,8 @@ exports.getArticleById=function(req,res){
 
 
 exports.getListById=function(req,res){
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-  //res.header('Access-Control-Allow-Origin', pdUrl)
+  //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.header('Access-Control-Allow-Origin', pdUrl)
 
   let id=req.params.id;
   console.log("client-getListById---",id)
