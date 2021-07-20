@@ -4,8 +4,11 @@ const app = express()
 const port = process.env.port || 8081;
 var adminCtrl=require("./Ctrl/adminCtrl");
 
+const pdUrl="http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
+
 app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.header('Access-Control-Allow-Origin', pdUrl)
   res.header('Access-Control-Allow-Method', 'post')
   res.header('Access-Control-Allow-Headers', '*')
   res.send()
