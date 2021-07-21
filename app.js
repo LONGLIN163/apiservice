@@ -9,8 +9,8 @@ const pdUrl="https://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
 //const pdUrl="http://localhost:3000";
 
 app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', "http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com")
-  //res.header('Access-Control-Allow-Origin', '*')
+  //res.header('Access-Control-Allow-Origin', "http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com")
+  res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Method', 'post')
   res.header('Access-Control-Allow-Headers', '*')
   res.send()
