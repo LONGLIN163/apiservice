@@ -1,7 +1,6 @@
 const express = require('express')
 
 const app = express()
-//const port = process.env.port || 8081;
 const port = process.env.PORT || 3000;
 var adminCtrl=require("./Ctrl/adminCtrl");
 var clientCtrl=require("./Ctrl/clientCtrl");
