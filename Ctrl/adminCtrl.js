@@ -2,16 +2,10 @@
 const mysql = require('mysql');
 var formidable = require('formidable');
 
-//const pdUrl="http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
 const pdUrl="http://localhost:3000";
 
 var db = mysql.createConnection({
-    //host: 'blog-db.camhq7invtrq.us-east-2.rds.amazonaws.com',
     host: 'localhost',
-    // port: '3306',
-    // user: 'longlin',
-    // password: '12345678',
-    // database: 'react_blog'
     user: 'id19359036_root',
     database: 'id19359036_llblogdb',
     password: 'Qc0Upf=&lTljgquc'
@@ -19,7 +13,6 @@ var db = mysql.createConnection({
 
 exports.checkLogin=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
-
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
         console.log(fields)
@@ -60,7 +53,6 @@ exports.index=function(req,res){
         if(err){
           console.log("server error---",err);
         }else{
-          //console.log(data);
           res.json({"data":data})
         }
     })
@@ -74,7 +66,6 @@ exports.getTypeInfo=function(req,res){
         if(err){
           console.log("server error---",err);
         }else{
-          //console.log(data);
           res.json({"data":data})
         }
     })
@@ -86,7 +77,6 @@ exports.addArticle=function(req,res){
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
         let temArticle=fields;
-        //console.log("addArticle------>",temArticle)
 
         function toLiteral(str) {
           var dict = { '\b': 'b', '\t': 't', '\n': 'n', '\v': 'v', '\f': 'f', '\r': 'r' };
@@ -103,9 +93,6 @@ exports.addArticle=function(req,res){
             +temArticle.introduce+'","'
             +temArticle.addTime+'",'
             +temArticle.view_count+')';
-            
-            //'article_content="'+`${ toLiteral(temArticle.article_content)}`+'",'+
-            //+temArticle.article_content+'","'
         console.log("sql:",sql)
 
         db.query(sql,(error, results, fields) => {
@@ -149,9 +136,7 @@ exports.updateArticle=function(req,res){
         'introduce="'+temArticle.introduce+'",'+
         'addTime="'+temArticle.addTime+'" '+
         'WHERE article.id='+temArticle.id;
-        
-        //'article_content="'+temArticle.article_content.replace("'","''");+'",'+
-
+      
         console.log("sql-----:",sql)
 
         db.query(sql,(error, results, fields) => {
