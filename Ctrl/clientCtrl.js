@@ -6,12 +6,11 @@ var formidable = require('formidable');
 const pdUrl="https://ll-blog-client.vercel.app";
 
 var db = mysql.createConnection({
-    host: 'blog-db.camhq7invtrq.us-east-2.rds.amazonaws.com',
-    port: '3306',
-    user: 'longlin',
-    password: '12345678',
-    database: 'react_blog'
-  });
+  host: 'us-cdbr-east-06.cleardb.net',
+  user: 'be01279bf6aec6',
+  password: 'c8ffeb4d',
+  database: 'heroku_058e3975255d597'
+});
 
 
 exports.index=function(req,res){

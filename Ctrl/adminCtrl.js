@@ -5,10 +5,10 @@ var formidable = require('formidable');
 const pdUrl="http://localhost:3000";
 
 var db = mysql.createConnection({
-    host: 'localhost',
-    user: 'id19359036_root',
-    database: 'id19359036_llblogdb',
-    password: 'Qc0Upf=&lTljgquc'
+    host: 'us-cdbr-east-06.cleardb.net',
+    user: 'be01279bf6aec6',
+    password: 'c8ffeb4d',
+    database: 'heroku_058e3975255d597'
   });
 
 exports.checkLogin=function(req,res){
