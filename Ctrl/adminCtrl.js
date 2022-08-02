@@ -2,15 +2,19 @@
 const mysql = require('mysql');
 var formidable = require('formidable');
 
-const pdUrl="http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
-//const pdUrl="http://localhost:3000";
+//const pdUrl="http://ll-blog-admin.s3-website.eu-west-3.amazonaws.com";
+const pdUrl="http://localhost:3000";
 
 var db = mysql.createConnection({
-    host: 'blog-db.camhq7invtrq.us-east-2.rds.amazonaws.com',
-    port: '3306',
-    user: 'longlin',
-    password: '12345678',
-    database: 'react_blog'
+    //host: 'blog-db.camhq7invtrq.us-east-2.rds.amazonaws.com',
+    host: 'localhost',
+    // port: '3306',
+    // user: 'longlin',
+    // password: '12345678',
+    // database: 'react_blog'
+    user: 'id19359036_root',
+    database: 'id19359036_llblogdb',
+    password: 'Qc0Upf=&lTljgquc'
   });
 
 exports.checkLogin=function(req,res){
