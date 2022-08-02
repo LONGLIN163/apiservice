@@ -1,10 +1,5 @@
-
 const mysql = require('mysql');
-var formidable = require('formidable');
-
-//const pdUrl="http://localhost:3000";
 const pdUrl="https://ll-blog-client.vercel.app";
-
 var db = mysql.createConnection({
   host: 'us-cdbr-east-06.cleardb.net',
   user: 'be01279bf6aec6',
@@ -12,39 +7,31 @@ var db = mysql.createConnection({
   database: 'heroku_058e3975255d597'
 });
 
-
 exports.index=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
 
     db.query("SELECT * FROM type",function(err,data){
         if(err){
           console.log("access type info wrong",err);
         }else{
-          //console.log(data);
           res.json({"data":data})
         }
     })
 }
-
 
 exports.getTypeInfo=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
 
     db.query("SELECT * FROM type",function(err,data){
         if(err){
           console.log("access type info wrong",err);
         }else{
-          //console.log(data);
           res.json({"data":data})
         }
     })
 }
 
-
 exports.getArticleList=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
 
     let sql = 'SELECT article.id as id,'+
@@ -65,11 +52,9 @@ exports.getArticleList=function(req,res){
 }
 
 exports.getArticleById=function(req,res){
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Origin', pdUrl)
 
     let id=req.params.id;
-    console.log("client-getArticleById---",id)
 
     let sql='SELECT article.id as id,'+
     'article.title as title,'+
@@ -86,7 +71,6 @@ exports.getArticleById=function(req,res){
         if(err){
           console.log("access type info wrong",err);
         }else{
-          //console.log(data);
           res.json({"data":data})
         }
     })  
@@ -94,11 +78,9 @@ exports.getArticleById=function(req,res){
 
 
 exports.getListById=function(req,res){
-  //res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.header('Access-Control-Allow-Origin', pdUrl)
 
   let id=req.params.id;
-  console.log("client-getListById---",id)
 
   let sql='SELECT article.id as id ,'+
   'article.title as title ,'+
@@ -113,7 +95,6 @@ exports.getListById=function(req,res){
       if(err){
         console.log("access type info wrong",err);
       }else{
-        //console.log(data);
         res.json({"data":data})
       }
   })  
