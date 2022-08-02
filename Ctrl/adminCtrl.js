@@ -1,6 +1,5 @@
 const mysql = require('mysql');
 var formidable = require('formidable');
-
 const pdUrl="http://localhost:3000";
 
 var db = mysql.createConnection({
@@ -14,7 +13,7 @@ exports.checkLogin=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
-
+        console.log(fields)
         let userName=fields.userName;
         let password=fields.password;
   
@@ -23,7 +22,6 @@ exports.checkLogin=function(req,res){
     
         db.query(sql, function(err,data){
             let openId=new Date().getTime();
-
             if(err){
                console.log("sever error---",err);
                return;
@@ -37,11 +35,11 @@ exports.checkLogin=function(req,res){
                     "data":"login failed"
                 })
             }
+            console.log("session******openId*******:"+openId)
         }) 
+    
     })
 }
-
-
 exports.index=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
     db.query("SELECT * FROM type",function(err,data){
@@ -52,8 +50,6 @@ exports.index=function(req,res){
         }
     })
 }
-
-
 exports.getTypeInfo=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
     db.query("SELECT * FROM type",function(err,data){
@@ -64,20 +60,17 @@ exports.getTypeInfo=function(req,res){
         }
     })
 }
-
 exports.addArticle=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
         let temArticle=fields;
-
         function toLiteral(str) {
           var dict = { '\b': 'b', '\t': 't', '\n': 'n', '\v': 'v', '\f': 'f', '\r': 'r' };
           return str.replace(/([\\'"\b\t\n\v\f\r])/g, function($0, $1) {
               return '\\' + (dict[$1] || $1);
           });
         }
-
         const sql = 'INSERT INTO '+
             'article VALUES('+0+','
             +temArticle.type_id+
@@ -86,12 +79,12 @@ exports.addArticle=function(req,res){
             +temArticle.introduce+'","'
             +temArticle.addTime+'",'
             +temArticle.view_count+')';
-
+        console.log("sql:",sql)
         db.query(sql,(error, results, fields) => {
           if (error) {
             throw error;
           }
-
+          console.log("addArticle---results----------",results);
           const insertSuccess = results.affectedRows === 1; // if there is one row changed, it will be true
           const insertId = results.insertId
         
@@ -99,17 +92,15 @@ exports.addArticle=function(req,res){
               isScuccess:insertSuccess,
               insertId
             })
-
         });
     })
 }
-
-
 exports.updateArticle=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
         let temArticle=fields;
+        //console.log("updateArticle------>",temArticle)
         function toLiteral(str) {
           var dict = { '\b': 'b', '\t': 't', '\n': 'n', '\v': 'v', '\f': 'f', '\r': 'r' };
           return str.replace(/([\\'"\b\t\n\v\f\r])/g, function($0, $1) {
@@ -123,24 +114,23 @@ exports.updateArticle=function(req,res){
         'introduce="'+temArticle.introduce+'",'+
         'addTime="'+temArticle.addTime+'" '+
         'WHERE article.id='+temArticle.id;
+      
+        console.log("sql-----:",sql)
         db.query(sql,(error, results, fields) => {
           if (error) {
             throw error;
           }
+          console.log("updateresults----------",results);
           const updateSuccess = results.affectedRows === 1; // if there is one row changed, it will be true
+        
           res.json({
               isSuccess:updateSuccess
           })
-
         });
     })
 }
-
-
-
 exports.getArticleList=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
-
     let sql = 'SELECT article.id as id,'+
     'article.title as title,'+
     'article.introduce as introduce,'+
@@ -149,7 +139,6 @@ exports.getArticleList=function(req,res){
     'type.typeName as typeName '+
     'FROM article LEFT JOIN type ON article.type_id = type.Id '+
     'ORDER BY article.id DESC'
-
     db.query(sql,function(err,data){
         if(err){
           console.log("server error---",err);
@@ -158,13 +147,10 @@ exports.getArticleList=function(req,res){
         }
     })  
 }
-
 exports.getArticleById=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
-
     let id=req.params.id;
     console.log("id---",id)
-
     let sql='SELECT article.id as id,'+
     'article.title as title,'+
     'article.introduce as introduce,'+
@@ -175,17 +161,15 @@ exports.getArticleById=function(req,res){
     'type.id as typeId '+
     'FROM article LEFT JOIN type ON article.type_id = type.Id '+ 
     'WHERE article.id='+id
-
     db.query(sql,function(err,data){
         if(err){
           console.log("access type info wrong",err);
         }else{
+          //console.log(data);
           res.json({"data":data})
         }
     })  
 }
-
-
 exports.delArticle=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
     
