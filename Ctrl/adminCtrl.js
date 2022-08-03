@@ -5,6 +5,8 @@ var formidable = require('formidable');
 const pdUrl="http://localhost:3000"; // when client is running on server, this one is just for running on local
 const db = require("../config/db")
 
+db.connect()
+
 exports.checkLogin=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
     let form = new formidable.IncomingForm()
