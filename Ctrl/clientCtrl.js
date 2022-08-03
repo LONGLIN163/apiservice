@@ -1,5 +1,5 @@
-//const pdUrl="https://ll-blog-client.vercel.app";
-const pdUrl="http://localhost:3000";
+const pdUrl="https://ll-blog-client.vercel.app";
+//const pdUrl="http://localhost:3000";
 const db = require("../config/db")
 
 exports.index=function(req,res){
