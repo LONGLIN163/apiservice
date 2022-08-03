@@ -1,11 +1,6 @@
-const mysql = require('mysql');
-const pdUrl="https://ll-blog-client.vercel.app";
-var db = mysql.createConnection({
-  host: 'us-cdbr-east-06.cleardb.net',
-  user: 'be01279bf6aec6',
-  password: 'c8ffeb4d',
-  database: 'heroku_058e3975255d597'
-});
+//const pdUrl="https://ll-blog-client.vercel.app";
+const pdUrl="http://localhost:3000";
+const db = require("../config/db")
 
 exports.index=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)

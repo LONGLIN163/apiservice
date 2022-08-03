@@ -1,13 +1,9 @@
-const mysql = require('mysql');
-var formidable = require('formidable');
-const pdUrl="http://localhost:3000";
 
-var db = mysql.createConnection({
-    host: 'us-cdbr-east-06.cleardb.net',
-    user: 'be01279bf6aec6',
-    password: 'c8ffeb4d',
-    database: 'heroku_058e3975255d597'
-  });
+
+var formidable = require('formidable');
+//const pdUrl="http://localhost:3001";// when testing, start client(3000) first.
+const pdUrl="http://localhost:3000"; // when client is running on server, this one is just for running on local
+const db = require("../config/db")
 
 exports.checkLogin=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
