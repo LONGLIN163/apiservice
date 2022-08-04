@@ -1,8 +1,6 @@
 const pdUrl="https://ll-blog-client.vercel.app";
 //const pdUrl="http://localhost:3000";
-const db = require("../config/db")
-
-db.connect()
+const db = require("../db.js");
 
 exports.index=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)

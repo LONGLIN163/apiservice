@@ -3,9 +3,7 @@
 var formidable = require('formidable');
 //const pdUrl="http://localhost:3001";// when testing, start client(3000) first.
 const pdUrl="http://localhost:3000"; // when client is running on server, this one is just for running on local
-const db = require("../config/db")
-
-db.connect()
+const db = require("../db.js");
 
 exports.checkLogin=function(req,res){
     res.header('Access-Control-Allow-Origin', pdUrl)
