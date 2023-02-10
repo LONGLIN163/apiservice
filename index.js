@@ -1,17 +1,10 @@
 const express = require('express')
-
+var cors = require('cors')
 const app = express()
+app.use(cors())
 const port = process.env.PORT || 8080;
 var adminCtrl=require("./Ctrl/adminCtrl");
 var clientCtrl=require("./Ctrl/clientCtrl");
-
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Method', 'post')
-  res.header('Access-Control-Allow-Headers', '*')
-  res.send()
-})
-
 
 app.get('/',                         adminCtrl.index);
 app.post('/admin/checkLogin',        adminCtrl.checkLogin);

@@ -1,12 +1,9 @@
 
 
 var formidable = require('formidable');
-//const pdUrl="http://localhost:3001";// when testing, start client(3000) first.
-const pdUrl="http://localhost:3000"; // when client is running on server, this one is just for running on local
 const db = require("../db.js");
 
 exports.checkLogin=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
         console.log(fields)
@@ -31,13 +28,12 @@ exports.checkLogin=function(req,res){
                     "data":"login failed"
                 })
             }
-            console.log("session******openId*******:"+openId)
+            //console.log("session******openId*******:"+openId)
         }) 
     
     })
 }
 exports.index=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
     db.query("SELECT * FROM type",function(err,data){
         if(err){
           console.log("server error---",err);
@@ -47,7 +43,6 @@ exports.index=function(req,res){
     })
 }
 exports.getTypeInfo=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
     db.query("SELECT * FROM type",function(err,data){
         if(err){
           console.log("server error---",err);
@@ -57,7 +52,6 @@ exports.getTypeInfo=function(req,res){
     })
 }
 exports.addArticle=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
         let temArticle=fields;
@@ -80,7 +74,7 @@ exports.addArticle=function(req,res){
           if (error) {
             throw error;
           }
-          console.log("addArticle---results----------",results);
+          //console.log("addArticle---results----------",results);
           const insertSuccess = results.affectedRows === 1; // if there is one row changed, it will be true
           const insertId = results.insertId
         
@@ -92,7 +86,6 @@ exports.addArticle=function(req,res){
     })
 }
 exports.updateArticle=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, file) => {
         let temArticle=fields;
@@ -111,12 +104,12 @@ exports.updateArticle=function(req,res){
         'addTime="'+temArticle.addTime+'" '+
         'WHERE article.id='+temArticle.id;
       
-        console.log("sql-----:",sql)
+        //console.log("sql-----:",sql)
         db.query(sql,(error, results, fields) => {
           if (error) {
             throw error;
           }
-          console.log("updateresults----------",results);
+          //console.log("updateresults----------",results);
           const updateSuccess = results.affectedRows === 1; // if there is one row changed, it will be true
         
           res.json({
@@ -126,7 +119,6 @@ exports.updateArticle=function(req,res){
     })
 }
 exports.getArticleList=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
     let sql = 'SELECT article.id as id,'+
     'article.title as title,'+
     'article.introduce as introduce,'+
@@ -144,7 +136,6 @@ exports.getArticleList=function(req,res){
     })  
 }
 exports.getArticleById=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
     let id=req.params.id;
     console.log("id---",id)
     let sql='SELECT article.id as id,'+
@@ -166,13 +157,11 @@ exports.getArticleById=function(req,res){
         }
     })  
 }
-exports.delArticle=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
-    
+exports.delArticle=function(req,res){    
     let id=req.params.id;
-    console.log("id---",id)
+    //console.log("id---",id)
     let sql = `DELETE FROM article WHERE id = ${id}`
-    console.log("sql---",sql)
+    //console.log("sql---",sql)
     db.query(sql,function(err,data){
         if(err){
           console.log("access type info wrong",err);

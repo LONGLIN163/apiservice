@@ -1,10 +1,6 @@
-const pdUrl="https://ll-blog-client.vercel.app";
-//const pdUrl="http://localhost:3000";
 const db = require("../db.js");
 
 exports.index=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
-
     db.query("SELECT * FROM type",function(err,data){
         if(err){
           console.log("access type info wrong",err);
@@ -15,8 +11,6 @@ exports.index=function(req,res){
 }
 
 exports.getTypeInfo=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
-
     db.query("SELECT * FROM type",function(err,data){
         if(err){
           console.log("access type info wrong",err);
@@ -27,8 +21,6 @@ exports.getTypeInfo=function(req,res){
 }
 
 exports.getArticleList=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
-
     let sql = 'SELECT article.id as id,'+
     'article.title as title,'+
     'article.introduce as introduce,'+
@@ -47,8 +39,6 @@ exports.getArticleList=function(req,res){
 }
 
 exports.getArticleById=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
-
     let id=req.params.id;
 
     let sql='SELECT article.id as id,'+
@@ -73,8 +63,6 @@ exports.getArticleById=function(req,res){
 
 
 exports.getListById=function(req,res){
-  res.header('Access-Control-Allow-Origin', pdUrl)
-
   let id=req.params.id;
 
   let sql='SELECT article.id as id ,'+
