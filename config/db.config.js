@@ -1,4 +1,4 @@
-/**********config for heroku********** */
+/**********config for heroku db********** */
 // module.exports = {
 //     HOST: 'us-cdbr-east-06.cleardb.net',
 //     USER: 'be01279bf6aec6',
@@ -6,7 +6,7 @@
 //     DB: 'heroku_058e3975255d597'
 // };
 
-/**********config for local********** */
+/**********config for local db********** */
 // module.exports = {
 //     HOST: 'localhost',
 //     PORT: '3308',
