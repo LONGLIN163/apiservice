@@ -1,5 +1,5 @@
 /*****prod allow client cors******/
-const pdUrl="https://ll-blog-client.vercel.app";
+//const pdUrl="https://ll-blog-client.vercel.app";
 
 /*****local allow client cors******/
 //const pdUrl="http://localhost:3000";
@@ -7,7 +7,7 @@ const pdUrl="https://ll-blog-client.vercel.app";
 const db = require("../db.js");
 
 exports.index=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
+    //res.header('Access-Control-Allow-Origin', pdUrl)
 
     db.query("SELECT * FROM type",function(err,data){
         if(err){
@@ -19,7 +19,7 @@ exports.index=function(req,res){
 }
 
 exports.getTypeInfo=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
+    //res.header('Access-Control-Allow-Origin', pdUrl)
 
     db.query("SELECT * FROM type",function(err,data){
         if(err){
@@ -31,7 +31,7 @@ exports.getTypeInfo=function(req,res){
 }
 
 exports.getArticleList=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
+    //res.header('Access-Control-Allow-Origin', pdUrl)
 
     let sql = 'SELECT article.id as id,'+
     'article.title as title,'+
@@ -51,7 +51,7 @@ exports.getArticleList=function(req,res){
 }
 
 exports.getArticleById=function(req,res){
-    res.header('Access-Control-Allow-Origin', pdUrl)
+    //res.header('Access-Control-Allow-Origin', pdUrl)
 
     let id=req.params.id;
 
@@ -77,7 +77,7 @@ exports.getArticleById=function(req,res){
 
 
 exports.getListById=function(req,res){
-  res.header('Access-Control-Allow-Origin', pdUrl)
+  //res.header('Access-Control-Allow-Origin', pdUrl)
 
   let id=req.params.id;
 
