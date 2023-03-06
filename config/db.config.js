@@ -17,10 +17,10 @@
 
 /**********config for aws********** */
 module.exports = {
-    HOST: 'myreactnextblogdb.cbtcpttx4jth.us-east-1.rds.amazonaws.com',
+    HOST: 'myblogdb-small.cbtcpttx4jth.us-east-1.rds.amazonaws.com',
     PORT: '3306',
     USER: 'admin_long',
     PASSWORD: 'long123456',
-    DB: 'reactblog_db'
+    DB: 'myblogdb_small'
 };
 
